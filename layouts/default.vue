@@ -1,12 +1,24 @@
 <template>
   <v-app>
-    <v-app-bar color="primary" prominent>
+    <v-app-bar color="#48647f" prominent>
       <v-app-bar-nav-icon
         variant="text"
         @click.stop="drawer = !drawer"
       ></v-app-bar-nav-icon>
 
-      <v-toolbar-title>My files</v-toolbar-title>
+      <NuxtLink to="/">
+        <v-avatar rounded="0" class="ml-4">
+          <v-img alt="John" src="/img/favicon-3.png"></v-img>
+        </v-avatar>
+      </NuxtLink>
+
+      <v-spacer></v-spacer>
+
+      <template v-if="$vuetify.display.mdAndUp">
+        <v-toolbar-title style="text-align: center; font-size: 28px"
+          >OLA Hospital</v-toolbar-title
+        >
+      </template>
 
       <v-spacer></v-spacer>
 
@@ -20,7 +32,55 @@
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" temporary>
-      <v-list :items="items"></v-list>
+      <v-list v-model:opened="open">
+        <v-list-item prepend-icon="mdi-home" title="Home"></v-list-item>
+
+        <v-list-group value="Users">
+          <template v-slot:activator="{ props }">
+            <v-list-item
+              v-bind="props"
+              prepend-icon="mdi-account-circle"
+              title="Users"
+            ></v-list-item>
+          </template>
+        </v-list-group>
+
+        <v-list-group value="Admin">
+          <template v-slot:activator="{ props }">
+            <v-list-item
+              v-bind="props"
+              prepend-icon="mdi-account-circle"
+              title="Admin"
+            ></v-list-item>
+          </template>
+
+          <v-list-item
+            v-for="([title, icon], i) in admins"
+            :key="i"
+            :prepend-icon="icon"
+            :title="title"
+            :value="title"
+          ></v-list-item>
+        </v-list-group>
+
+        <v-list-group value="Actions">
+          <template v-slot:activator="{ props }">
+            <v-list-item
+              v-bind="props"
+              prepend-icon="mdi-account-circle"
+              title="Actions"
+            ></v-list-item>
+          </template>
+
+          <v-list-item
+            v-for="([title, icon], i) in cruds"
+            :key="i"
+            :prepend-icon="icon"
+            :title="title"
+            :value="title"
+          ></v-list-item>
+        </v-list-group>
+      </v-list>
     </v-navigation-drawer>
 
     <slot />
@@ -31,31 +91,17 @@
 export default {
   data: () => ({
     drawer: false,
-    group: null,
-    items: [
-      {
-        title: "Foo",
-        value: "foo",
-      },
-      {
-        title: "Bar",
-        value: "bar",
-      },
-      {
-        title: "Fizz",
-        value: "fizz",
-      },
-      {
-        title: "Buzz",
-        value: "buzz",
-      },
+    open: ["Users"],
+    admins: [
+      ["Management", "mdi-account-multiple-outline"],
+      ["Settings", "mdi-cog-outline"],
+    ],
+    cruds: [
+      ["Create", "mdi-plus-outline"],
+      ["Read", "mdi-file-outline"],
+      ["Update", "mdi-update"],
+      ["Delete", "mdi-delete"],
     ],
   }),
-
-  watch: {
-    group() {
-      this.drawer = false;
-    },
-  },
 };
 </script>
