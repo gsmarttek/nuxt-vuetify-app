@@ -8,6 +8,9 @@ export default defineNuxtConfig({
   alias: {
     "@": resolve(__dirname, "/")
   },
+  css: [
+    'vuetify/styles',
+  ],
   build: {
     transpile: ['vuetify'],
   },
