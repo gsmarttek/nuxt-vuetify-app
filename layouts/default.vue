@@ -87,21 +87,19 @@
   </v-app>
 </template>
 
-<script>
-export default {
-  data: () => ({
-    drawer: false,
-    open: ["Users"],
-    admins: [
-      ["Management", "mdi-account-multiple-outline"],
-      ["Settings", "mdi-cog-outline"],
-    ],
-    cruds: [
-      ["Create", "mdi-plus-outline"],
-      ["Read", "mdi-file-outline"],
-      ["Update", "mdi-update"],
-      ["Delete", "mdi-delete"],
-    ],
-  }),
-};
+<script setup>
+const drawer = ref(false);
+const open = ref(["Users"]);
+
+const admins = ref([
+  ["Management", "mdi-account-multiple-outline"],
+  ["Settings", "mdi-cog-outline"],
+]);
+
+const cruds = ref([
+  ["Create", "mdi-plus-outline"],
+  ["Read", "mdi-file-outline"],
+  ["Update", "mdi-update"],
+  ["Delete", "mdi-delete"],
+]);
 </script>
