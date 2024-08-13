@@ -7,7 +7,7 @@
       ></v-app-bar-nav-icon>
 
       <NuxtLink to="/">
-        <v-avatar rounded="0" class="ml-4">
+        <v-avatar rounded="0" size="small" class="ml-4">
           <v-img alt="John" src="/img/favicon-3.png"></v-img>
         </v-avatar>
       </NuxtLink>
@@ -24,32 +24,24 @@
 
       <template v-if="$vuetify.display.mdAndUp">
         <v-btn icon="mdi-magnify" variant="text"></v-btn>
-
-        <v-btn icon="mdi-filter" variant="text"></v-btn>
       </template>
+
+      <v-btn @click="toggleTheme" icon>
+        <v-icon>{{ themeIcon }}</v-icon>
+      </v-btn>
 
       <v-btn icon="mdi-dots-vertical" variant="text"></v-btn>
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" temporary>
-      <v-list v-model:opened="open">
+      <v-list>
         <v-list-item prepend-icon="mdi-home" title="Home"></v-list-item>
-
-        <v-list-group value="Users">
-          <template v-slot:activator="{ props }">
-            <v-list-item
-              v-bind="props"
-              prepend-icon="mdi-account-circle"
-              title="Users"
-            ></v-list-item>
-          </template>
-        </v-list-group>
 
         <v-list-group value="Admin">
           <template v-slot:activator="{ props }">
             <v-list-item
               v-bind="props"
-              prepend-icon="mdi-account-circle"
+              prepend-icon="mdi-shield-account"
               title="Admin"
             ></v-list-item>
           </template>
@@ -67,7 +59,7 @@
           <template v-slot:activator="{ props }">
             <v-list-item
               v-bind="props"
-              prepend-icon="mdi-account-circle"
+              prepend-icon="mdi-text-box-edit"
               title="Actions"
             ></v-list-item>
           </template>
@@ -88,8 +80,9 @@
 </template>
 
 <script setup>
+import { useTheme } from "vuetify";
+
 const drawer = ref(false);
-const open = ref(["Users"]);
 
 const admins = ref([
   ["Management", "mdi-account-multiple-outline"],
@@ -102,4 +95,15 @@ const cruds = ref([
   ["Update", "mdi-update"],
   ["Delete", "mdi-delete"],
 ]);
+
+const theme = useTheme();
+
+const themeIcon = computed(() =>
+  theme.global.name.value === "dark" ? "mdi-weather-sunny" : "mdi-weather-night"
+);
+
+const toggleTheme = () => {
+  theme.global.name.value =
+    theme.global.name.value === "dark" ? "light" : "dark";
+};
 </script>
