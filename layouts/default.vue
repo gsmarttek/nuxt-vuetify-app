@@ -22,12 +22,17 @@
 
       <v-spacer></v-spacer>
 
-      <template v-if="$vuetify.display.mdAndUp">
-        <v-btn icon="mdi-magnify" variant="text"></v-btn>
-      </template>
-
       <v-btn @click="toggleTheme" icon>
         <v-icon>{{ themeIcon }}</v-icon>
+      </v-btn>
+
+      <v-btn
+        variant="outlined"
+        to="/login"
+        size="small"
+        text="Login"
+        class="ml-3 mr-2"
+      >
       </v-btn>
 
       <v-btn icon="mdi-dots-vertical" variant="text"></v-btn>

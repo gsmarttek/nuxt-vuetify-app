@@ -3,7 +3,7 @@
     <v-container>
       <v-row>
         <v-col cols="12" sm="12">
-          <v-carousel>
+          <v-carousel show-arrows="hover" cycle hide-delimiter-background>
             <v-carousel-item
               v-for="(item, i) in items"
               :key="i"
