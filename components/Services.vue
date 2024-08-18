@@ -8,7 +8,7 @@
               <v-hover v-slot="{ isHovering, props }">
                 <v-card
                   class="mx-auto"
-                  color="grey-lighten-4"
+                  color="grey-lighten-5"
                   max-width="600"
                   v-bind="props"
                 >
