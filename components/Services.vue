@@ -62,22 +62,22 @@
 const services = ref([
   {
     image: "img/services/w-1.jpg",
-    title: " Find Patient Information",
+    title: " Create and Find Patient Records",
     subtitle1: "Patients",
   },
   {
     image: "img/services/w-2.jpg",
-    title: " Get laboratory Results",
+    title: " Get Accurate laboratory Results",
     subtitle1: "Laboratory",
   },
   {
     image: "img/services/w-3.jpg",
-    title: " Buy Drugs from Pharmacy",
+    title: " Buy and Sell Drugs from Pharmacy",
     subtitle1: "Pharmacy",
   },
   {
     image: "img/services/w-4.jpg",
-    title: " Get the Best Consultation",
+    title: " Get the Best Consultations",
     subtitle1: "Consultancy",
   },
 ]);

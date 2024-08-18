@@ -53,6 +53,7 @@
             "
             class="font-weght-medium"
             v-bind="props"
+            to="/"
             >Home</v-btn
           >
         </template>
