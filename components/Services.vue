@@ -21,7 +21,13 @@
                       >
                         <v-row>
                           <v-col cols="12" sm="12">
-                            <h1 class="ml-4">{{ service.subtitle1 }}</h1>
+                            <template v-if="!$vuetify.display.smAndUp">
+                              <h1 class="ml-5 mb-5">{{ service.subtitle1 }}</h1>
+                            </template>
+
+                            <template v-if="$vuetify.display.smAndUp">
+                              <h2 class="ml-5 mb-5">{{ service.subtitle1 }}</h2>
+                            </template>
                           </v-col>
                         </v-row>
                       </div>

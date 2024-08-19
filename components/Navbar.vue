@@ -73,20 +73,32 @@
         <v-list>
           <v-list-item>
             <v-list-item-title class="mb-1">
-              <NuxtLink to="/" class="no-underline" :class="subMenuColor">
-                Admin Page 1
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                Manage Users
               </NuxtLink>
             </v-list-item-title>
 
             <v-list-item-title class="mb-1">
-              <NuxtLink to="/" class="no-underline" :class="subMenuColor">
-                Admin Page 2
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                Set Logout Time
               </NuxtLink>
             </v-list-item-title>
 
             <v-list-item-title class="mb-1">
-              <NuxtLink to="/" class="no-underline" :class="subMenuColor">
-                Admin Page 3
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                Patient Status
               </NuxtLink>
             </v-list-item-title>
           </v-list-item>
@@ -107,14 +119,52 @@
         <v-list>
           <v-list-item>
             <v-list-item-title class="mb-1">
-              <NuxtLink to="/" class="no-underline" :class="subMenuColor">
-                Patients Page One
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                Patient Entry Form
               </NuxtLink>
             </v-list-item-title>
 
             <v-list-item-title class="mb-1">
-              <NuxtLink to="/" class="no-underline" :class="subMenuColor">
-                Patients Page Two
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                Patient Information Search
+              </NuxtLink>
+            </v-list-item-title>
+
+            <v-list-item-title class="mb-1">
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                Generate Patient QR Card
+              </NuxtLink>
+            </v-list-item-title>
+
+            <v-list-item-title class="mb-1">
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                Patients Queue (GOPD)
+              </NuxtLink>
+            </v-list-item-title>
+
+            <v-list-item-title class="mb-1">
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                Patients Queue (POPD)
               </NuxtLink>
             </v-list-item-title>
           </v-list-item>
@@ -135,14 +185,22 @@
         <v-list>
           <v-list-item>
             <v-list-item-title class="mb-1">
-              <NuxtLink to="/" class="no-underline" :class="subMenuColor">
-                Insurance One
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                Enrollees
               </NuxtLink>
             </v-list-item-title>
 
             <v-list-item-title class="mb-1">
-              <NuxtLink to="/" class="no-underline" :class="subMenuColor">
-                Insurance Two
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                Add HMO
               </NuxtLink>
             </v-list-item-title>
           </v-list-item>
@@ -163,14 +221,42 @@
         <v-list>
           <v-list-item>
             <v-list-item-title class="mb-1">
-              <NuxtLink to="/" class="no-underline" :class="subMenuColor">
-                Pharmacy Page One
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                Add/Find Products
               </NuxtLink>
             </v-list-item-title>
 
             <v-list-item-title class="mb-1">
-              <NuxtLink to="/" class="no-underline" :class="subMenuColor">
-                Pharmacy Page Two
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                Add/Find Product Rate
+              </NuxtLink>
+            </v-list-item-title>
+
+            <v-list-item-title class="mb-1">
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                Display Product List
+              </NuxtLink>
+            </v-list-item-title>
+
+            <v-list-item-title class="mb-1">
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                Add/Find Pharmacy Supplies
               </NuxtLink>
             </v-list-item-title>
           </v-list-item>
@@ -191,14 +277,52 @@
         <v-list>
           <v-list-item>
             <v-list-item-title class="mb-1">
-              <NuxtLink to="/" class="no-underline" :class="subMenuColor">
-                OPD Page One
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                Payment (Walk In Patiet)
               </NuxtLink>
             </v-list-item-title>
 
             <v-list-item-title class="mb-1">
-              <NuxtLink to="/" class="no-underline" :class="subMenuColor">
-                OPD Page Two
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                Create/Find Lab Request
+              </NuxtLink>
+            </v-list-item-title>
+
+            <v-list-item-title class="mb-1">
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                Enter/Find Lab Results
+              </NuxtLink>
+            </v-list-item-title>
+
+            <v-list-item-title class="mb-1">
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                Create/Find X-Ray
+              </NuxtLink>
+            </v-list-item-title>
+
+            <v-list-item-title class="mb-1">
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                Create/Find USS
               </NuxtLink>
             </v-list-item-title>
           </v-list-item>
@@ -219,14 +343,42 @@
         <v-list>
           <v-list-item>
             <v-list-item-title class="mb-1">
-              <NuxtLink to="/" class="no-underline" :class="subMenuColor">
-                Registers Page One
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                Service Registration
               </NuxtLink>
             </v-list-item-title>
 
             <v-list-item-title class="mb-1">
-              <NuxtLink to="/" class="no-underline" :class="subMenuColor">
-                Registers Page Two
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                HMO Registration
+              </NuxtLink>
+            </v-list-item-title>
+
+            <v-list-item-title class="mb-1">
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                X-Ray Type Registration
+              </NuxtLink>
+            </v-list-item-title>
+
+            <v-list-item-title class="mb-1">
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                USS Type Registration
               </NuxtLink>
             </v-list-item-title>
           </v-list-item>
@@ -247,14 +399,122 @@
         <v-list>
           <v-list-item>
             <v-list-item-title class="mb-1">
-              <NuxtLink to="/" class="no-underline" :class="subMenuColor">
-                Reports Page One
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                Patients Report
               </NuxtLink>
             </v-list-item-title>
 
             <v-list-item-title class="mb-1">
-              <NuxtLink to="/" class="no-underline" :class="subMenuColor">
-                Reports Page Two
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                Payment Summary
+              </NuxtLink>
+            </v-list-item-title>
+
+            <v-list-item-title class="mb-1">
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                Payment Summary (Walk In Patient)
+              </NuxtLink>
+            </v-list-item-title>
+
+            <v-list-item-title class="mb-1">
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                Appointment Report
+              </NuxtLink>
+            </v-list-item-title>
+
+            <v-list-item-title class="mb-1">
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                X Ray Request Report
+              </NuxtLink>
+            </v-list-item-title>
+
+            <v-list-item-title class="mb-1">
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                USS Request Report
+              </NuxtLink>
+            </v-list-item-title>
+
+            <v-list-item-title class="mb-1">
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                Lab Request Report
+              </NuxtLink>
+            </v-list-item-title>
+
+            <v-list-item-title class="mb-1">
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                Lab Result Report
+              </NuxtLink>
+            </v-list-item-title>
+
+            <v-list-item-title class="mb-1">
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                Lab Result Report (Walk In Patient)
+              </NuxtLink>
+            </v-list-item-title>
+
+            <v-list-item-title class="mb-1">
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                Pharmacy Supply Report
+              </NuxtLink>
+            </v-list-item-title>
+
+            <v-list-item-title class="mb-1">
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                Pharmacy Dispense Report
+              </NuxtLink>
+            </v-list-item-title>
+
+            <v-list-item-title class="mb-1">
+              <NuxtLink
+                to="/"
+                class="text-decoration-none menu-item"
+                :class="subMenuColor"
+              >
+                Nurses Daily Report
               </NuxtLink>
             </v-list-item-title>
           </v-list-item>
@@ -351,10 +611,6 @@ const toggleTheme = () => {
 </script>
 
 <style scoped>
-.no-underline {
-  text-decoration: none;
-}
-
 .menu-light {
   color: #3d5b99;
 }
@@ -369,5 +625,18 @@ const toggleTheme = () => {
 
 .menu-dark-active {
   color: grey;
+}
+
+a.menu-item {
+  font-size: 0.9rem;
+}
+
+a.menu-item:hover,
+a.menu-item:focus {
+  padding-bottom: 2px;
+  border-bottom: 2px dotted #fe0000;
+  font-weight: 600;
+  background-color: transparent;
+  transition: 0.5s all ease;
 }
 </style>
