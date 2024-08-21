@@ -42,7 +42,7 @@ const themeH1 = computed(() =>
   margin-top: 120px;
 }
 .h1-light-color {
-  color: #566fa0;
+  color: #4e6593;
 }
 .h1-dark-color {
   color: #dce0e7;
