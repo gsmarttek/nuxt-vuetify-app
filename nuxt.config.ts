@@ -22,7 +22,6 @@ export default defineNuxtConfig({
           config.plugins.push(vuetify({ autoImport: true }))
         })
     },
-    '@vueuse/nuxt',
     '@sidebase/nuxt-auth',
   ],
   vite: {
