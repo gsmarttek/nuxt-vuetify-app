@@ -14,16 +14,52 @@ datasource db {
 }
 
 model User {
-  id        Int    @id @default(autoincrement())
-  firstname String
-  lastname  String
-  email     String @unique
-  role      Role   @relation(fields: [roleId], references: [id])
-  roleId    Int    @unique
+  id         Int      @id @default(autoincrement())
+  firstname  String
+  lastname   String
+  email      String   @unique
+  address    String
+  phone      String
+  sex        Gender
+  occupation String
+  role       Role
+  username   String   @unique
+  password   String
+  photo      String?
+  department String
+  doctor     IsDoctor @default(no)
+
+  @@map("users")
 }
 
-model Role {
-  id   Int    @id @default(autoincrement())
-  name String @unique
-  user User?
+enum Role {
+  medical_records
+  super_admin
+  admin
+  doctor
+  pharm
+  lab
+  cashier
+  nurse
+  insurance
+  x_ray
+  anc
+  uss
+  doctor_admin
+  pharm_admin
+  medical_records_admin
+  lab_admin
+  cashier_admin
+  nurse_admin
+  insurance_admin
+}
+
+enum Gender {
+  male
+  female
+}
+
+enum IsDoctor {
+  no
+  yes
 }
