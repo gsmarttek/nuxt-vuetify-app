@@ -593,7 +593,7 @@ const cruds = ref([
 const theme = useTheme();
 
 const themeIcon = computed(() =>
-  theme.global.name.value === "dark" ? "mdi-weather-sunny" : "mdi-weather-night"
+  theme.global.name.value === "dark" ? "mdi-weather-night" : "mdi-weather-sunny"
 );
 
 const menuColor = computed(() =>

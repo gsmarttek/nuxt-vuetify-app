@@ -23,6 +23,10 @@
 <script setup>
 import { useTheme } from "vuetify";
 
+definePageMeta({
+  middleware: "auth",
+});
+
 const theme = useTheme();
 
 const themeH1 = computed(() =>
