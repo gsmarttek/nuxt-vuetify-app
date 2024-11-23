@@ -46,11 +46,7 @@
         <template v-slot:activator="{ props }">
           <v-btn
             variant="text"
-            :class="
-              theme.global.name.value === 'dark'
-                ? 'menu-dark-active'
-                : 'menu-light-active'
-            "
+            :class="activeMainMenu(['/'])"
             class="font-weght-medium"
             v-bind="props"
             to="/"
@@ -63,7 +59,7 @@
         <template v-slot:activator="{ props }">
           <v-btn
             variant="text"
-            :color="menuColor"
+            :class="activeMainMenu(['/register'])"
             class="font-weght-medium"
             v-bind="props"
             >Admin +</v-btn
@@ -74,7 +70,7 @@
           <v-list-item>
             <v-list-item-title class="mb-1">
               <NuxtLink
-                to="/"
+                to="/register"
                 class="text-decoration-none menu-item"
                 :class="subMenuColor"
               >
@@ -575,6 +571,9 @@
 
 <script setup>
 import { useTheme } from "vuetify";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
 
 const drawer = ref(false);
 
@@ -592,12 +591,23 @@ const cruds = ref([
 
 const theme = useTheme();
 
+const activeMainMenu = (menu_array) => {
+  let style = "";
+  if (menu_array.includes(route.path)) {
+    style =
+      theme.global.name.value === "dark"
+        ? "menu-dark-active"
+        : "menu-light-active";
+  }
+  return style;
+};
+
 const themeIcon = computed(() =>
   theme.global.name.value === "dark" ? "mdi-weather-night" : "mdi-weather-sunny"
 );
 
 const menuColor = computed(() =>
-  theme.global.name.value === "dark" ? "" : "#3d5b99"
+  theme.global.name.value === "dark" ? "" : "menu-light"
 );
 
 const subMenuColor = computed(() =>

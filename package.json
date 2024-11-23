@@ -17,6 +17,7 @@
     "jsonwebtoken": "^9.0.2",
     "next-auth": "^4.21.1",
     "nuxt": "^3.12.4",
+    "vee-validate": "^4.14.7",
     "vue": "latest"
   },
   "devDependencies": {
