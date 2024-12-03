@@ -23,9 +23,9 @@
 <script setup>
 import { useTheme } from "vuetify";
 
-// definePageMeta({
-//   middleware: "auth",
-// });
+definePageMeta({
+  middleware: "auth",
+});
 
 const theme = useTheme();
 

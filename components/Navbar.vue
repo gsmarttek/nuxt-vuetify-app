@@ -59,7 +59,7 @@
         <template v-slot:activator="{ props }">
           <v-btn
             variant="text"
-            :class="activeMainMenu(['/register'])"
+            :class="activeMainMenu(['/user/register', '/user/users'])"
             class="font-weght-medium"
             v-bind="props"
             >Admin +</v-btn
@@ -70,7 +70,7 @@
           <v-list-item>
             <v-list-item-title class="mb-1">
               <NuxtLink
-                to="/register"
+                to="/user/users"
                 class="text-decoration-none menu-item"
                 :class="subMenuColor"
               >

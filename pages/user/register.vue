@@ -3,8 +3,20 @@
     <v-container fluid>
       <v-row justify="center">
         <v-col md="4">
-          <v-card class="pa-4 mt-10">
-            <v-card-title class="text-center">Register User</v-card-title>
+          <v-card class="pa-4 mt-5">
+            <v-card-title
+              class="text-center"
+              :class="themeTitle"
+              style="font-size: 22px"
+            >
+              Create New User - Register
+            </v-card-title>
+            <div class="text-center mb-5 mt-6">
+              <v-btn to="/user/users">
+                <v-icon icon="mdi-account-multiple" start></v-icon>
+                View Users
+              </v-btn>
+            </div>
             <v-card-item>
               <form @submit.prevent="submit">
                 <v-text-field
@@ -64,6 +76,12 @@
 <script setup>
 import { ref } from "vue";
 import { useField, useForm } from "vee-validate";
+import { useTheme } from "vuetify";
+
+const theme = useTheme();
+const themeTitle = computed(() =>
+  theme.global.name.value === "dark" ? "title-dark-color" : "title-light-color"
+);
 
 const { handleSubmit, handleReset } = useForm({
   validationSchema: {
@@ -112,3 +130,12 @@ const submit = handleSubmit((values) => {
   alert(JSON.stringify(values, null, 2));
 });
 </script>
+
+<style>
+.title-light-color {
+  color: #68758f;
+}
+.title-dark-color {
+  color: #dce0e7;
+}
+</style>
