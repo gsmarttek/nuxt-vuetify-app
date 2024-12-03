@@ -14,13 +14,13 @@
             <v-card-title
               class="text-center"
               :class="themeTitle"
-              style="font-size: 22px"
+              style="font-size: 24px"
             >
               Manage Users
             </v-card-title>
             <div class="mb-4 mt-6 ml-5">
               <v-btn to="/user/register">
-                <v-icon icon="mdi-plus-box" start></v-icon>
+                <v-icon icon="mdi-plus-box" size="20" start></v-icon>
                 Create New User
               </v-btn>
             </div>
@@ -36,8 +36,15 @@
               >
                 <template v-slot:top>
                   <v-toolbar flat>
-                    <v-toolbar-title>Users</v-toolbar-title>
-                    <v-divider class="mx-4" inset vertical></v-divider>
+                    <v-toolbar-title v-if="$vuetify.display.mdAndUp"
+                      >Users</v-toolbar-title
+                    >
+                    <v-divider
+                      class="mx-4"
+                      v-if="$vuetify.display.mdAndUp"
+                      inset
+                      vertical
+                    ></v-divider>
                     <v-spacer></v-spacer>
                     <v-text-field
                       v-model="search"
@@ -199,9 +206,7 @@ const defaultItem = ref({
   sex: "",
 });
 
-const formTitle = computed(() =>
-  editedIndex.value === -1 ? "New Item" : "Edit Item"
-);
+const formTitle = computed(() => "Edit Item");
 
 // watch: {
 //   dialog(val) {

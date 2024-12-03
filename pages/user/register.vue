@@ -7,13 +7,13 @@
             <v-card-title
               class="text-center"
               :class="themeTitle"
-              style="font-size: 22px"
+              style="font-size: 24px"
             >
               Create New User - Register
             </v-card-title>
             <div class="text-center mb-5 mt-6">
               <v-btn to="/user/users">
-                <v-icon icon="mdi-account-multiple" start></v-icon>
+                <v-icon icon="mdi-account-multiple" size="22" start></v-icon>
                 View Users
               </v-btn>
             </div>
