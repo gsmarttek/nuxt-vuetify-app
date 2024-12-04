@@ -11,7 +11,12 @@
       <v-row justify="center">
         <v-col md="4">
           <v-card class="pa-4 mt-10">
-            <v-card-title class="text-center">Please Login</v-card-title>
+            <v-card-title
+              class="text-center"
+              :class="themeTitle"
+              style="font-size: 24px"
+              >Please Login</v-card-title
+            >
             <v-card-item>
               <v-form @submit.prevent="submit">
                 <v-text-field
@@ -48,6 +53,13 @@
 </template>
 
 <script setup>
+import { useTheme } from "vuetify";
+
+const theme = useTheme();
+const themeTitle = computed(() =>
+  theme.global.name.value === "dark" ? "title-dark-color" : "title-light-color"
+);
+
 const form = ref({
   email: "",
   password: "",
@@ -77,3 +89,12 @@ const rules = {
   },
 };
 </script>
+
+<style>
+.title-light-color {
+  color: #68758f;
+}
+.title-dark-color {
+  color: #dce0e7;
+}
+</style>

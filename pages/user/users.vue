@@ -153,6 +153,9 @@
                     mdi-delete
                   </v-icon>
                 </template>
+                <template #item.created_at="{ item }">
+                  {{ formatDate(item.created_at) }}
+                </template>
               </v-data-table>
             </v-card-item>
           </v-card>
@@ -165,6 +168,7 @@
 <script setup>
 import { useTheme } from "vuetify";
 import { ref, onMounted, nextTick } from "vue";
+import dayjs from "dayjs";
 
 const theme = useTheme();
 const themeTitle = computed(() =>
@@ -265,4 +269,21 @@ function save() {
   }
   close();
 }
+
+function formatDate(date) {
+  return dayjs(date).format("MMM D, YYYY"); // Example: Dec 4, 2024
+}
 </script>
+
+<style>
+.v-data-table thead tr th span {
+  font-size: 1.1em;
+  text-transform: uppercase;
+}
+.title-light-color {
+  color: #68758f;
+}
+.title-dark-color {
+  color: #dce0e7;
+}
+</style>
