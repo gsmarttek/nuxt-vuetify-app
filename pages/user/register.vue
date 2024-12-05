@@ -62,7 +62,7 @@
                 <v-text-field
                   v-model="password.value.value"
                   :error-messages="password.errorMessage.value"
-                  hint="Enter your password to access this website"
+                  hint="Password should be at least 8 characters with lowercase uppercase numbers and ~?!@#$%^&*"
                   label="Password"
                   type="password"
                 ></v-text-field>
