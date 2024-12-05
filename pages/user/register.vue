@@ -64,14 +64,20 @@
                   :error-messages="password.errorMessage.value"
                   hint="Password should be at least 8 characters with lowercase uppercase numbers and ~?!@#$%^&*"
                   label="Password"
-                  type="password"
+                  :append-icon="show_password ? 'mdi-eye' : 'mdi-eye-off'"
+                  :type="show_password ? 'text' : 'password'"
+                  counter
+                  @click:append="show_password = !show_password"
                 ></v-text-field>
 
                 <v-text-field
                   v-model="password_confirm.value.value"
                   :error-messages="password_confirm.errorMessage.value"
                   label="Confirm Password"
-                  type="password"
+                  :append-icon="show_confirm ? 'mdi-eye' : 'mdi-eye-off'"
+                  :type="show_confirm ? 'text' : 'password'"
+                  counter
+                  @click:append="show_confirm = !show_confirm"
                 ></v-text-field>
 
                 <v-checkbox
@@ -106,6 +112,9 @@ const themeTitle = computed(() =>
 
 const confirm = ref("");
 const password_2 = ref("");
+
+const show_password = ref(false);
+const show_confirm = ref(false);
 
 const { handleSubmit, handleReset } = useForm({
   validationSchema: {
