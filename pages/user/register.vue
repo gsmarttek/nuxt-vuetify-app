@@ -53,6 +53,27 @@
                   label="Sex"
                 ></v-select>
 
+                <v-text-field
+                  v-model="username.value.value"
+                  :error-messages="username.errorMessage.value"
+                  label="Username"
+                ></v-text-field>
+
+                <v-text-field
+                  v-model="password.value.value"
+                  :error-messages="password.errorMessage.value"
+                  hint="Enter your password to access this website"
+                  label="Password"
+                  type="password"
+                ></v-text-field>
+
+                <v-text-field
+                  v-model="password_confirm.value.value"
+                  :error-messages="password_confirm.errorMessage.value"
+                  label="Confirm Password"
+                  type="password"
+                ></v-text-field>
+
                 <v-checkbox
                   v-model="checkbox.value.value"
                   :error-messages="checkbox.errorMessage.value"
@@ -83,6 +104,9 @@ const themeTitle = computed(() =>
   theme.global.name.value === "dark" ? "title-dark-color" : "title-light-color"
 );
 
+const confirm = ref("");
+const password_2 = ref("");
+
 const { handleSubmit, handleReset } = useForm({
   validationSchema: {
     firstname(value) {
@@ -110,6 +134,27 @@ const { handleSubmit, handleReset } = useForm({
 
       return "Select an item.";
     },
+    username(value) {
+      if (value?.length >= 5) return true;
+
+      return "Username needs to be at least 5 characters.";
+    },
+    password(value) {
+      password_2.value = value;
+
+      if (value?.length >= 8) return true;
+
+      return "Password needs to be at least 8 characters.";
+    },
+    password_confirm(value) {
+      confirm.value = value;
+
+      if (password_2.value !== confirm.value) {
+        return "Password and Confirm Password does not match.";
+      }
+
+      return true;
+    },
     checkbox(value) {
       if (value === "1") return true;
 
@@ -122,6 +167,9 @@ const lastname = useField("lastname");
 const phone = useField("phone");
 const email = useField("email");
 const sex = useField("sex");
+const username = useField("username");
+const password = useField("password");
+const password_confirm = useField("password_confirm");
 const checkbox = useField("checkbox");
 
 const items = ref(["Male", "Female"]);
