@@ -135,16 +135,24 @@ const { handleSubmit, handleReset } = useForm({
       return "Select an item.";
     },
     username(value) {
-      if (value?.length >= 5) return true;
+      if (value?.length >= 3) return true;
 
-      return "Username needs to be at least 5 characters.";
+      return "Username needs to be at least 3 characters.";
     },
     password(value) {
       password_2.value = value;
 
-      if (value?.length >= 8) return true;
+      if (!/^(?=.{8,})/.test(value)) {
+        return "Password needs to be at least 8 characters.";
+      } else if (!/^(?=.*[a-z])(?=.*[A-Z])/.test(value)) {
+        return "Password should contain a combination of lowercase and uppercase characters";
+      } else if (!/^(?=.*[0-9])/.test(value)) {
+        return "Password should have one or more numbers";
+      } else if (!/^(?=.*[\~?!@#\$%\^&\*])/.test(value)) {
+        return "Password should contain one or more special characters ~?!@#$%^&*";
+      }
 
-      return "Password needs to be at least 8 characters.";
+      return true;
     },
     password_confirm(value) {
       confirm.value = value;
