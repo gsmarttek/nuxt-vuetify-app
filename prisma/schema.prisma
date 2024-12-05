@@ -20,6 +20,8 @@ model User {
   email      String    @unique
   phone      String    @unique
   sex        Gender
+  username   String    @unique
+  password   String
   created_at DateTime  @default(now()) @db.DateTime(0)
   updated_at DateTime? @updatedAt
 
