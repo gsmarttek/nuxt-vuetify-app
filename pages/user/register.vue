@@ -42,7 +42,7 @@
 
                 <v-text-field
                   v-model="phone.value.value"
-                  :counter="7"
+                  :counter="11"
                   :error-messages="phone.errorMessage.value"
                   label="Phone Number"
                 ></v-text-field>
@@ -221,20 +221,30 @@ async function addUser(user) {
   isLoading.value = true;
 
   if (user)
-    return await $fetch("/api/auth/register", {
-      method: "POST",
-      body: user,
-    });
+    try {
+      const { data, error: fetchError } = await useFetch("/api/auth/register", {
+        method: "POST",
+        body: user,
+      });
+
+      if (fetchError.value) throw fetchError.value;
+
+      return data.value;
+    } catch (err) {
+      error_message.value =
+        err.data?.message || "Server Failure: could not create user!";
+      show_error.value = true;
+    }
 }
 
 const submit = handleSubmit(async (values) => {
   const response = await addUser(values);
 
-  if (response.success) {
+  if (response?.success) {
     user.value = response.data;
     show_success.value = true;
     handleReset();
-  } else if (response.error) {
+  } else if (response?.error) {
     error_message.value = response.error;
     show_error.value = true;
   }

@@ -19,7 +19,8 @@
     "next-auth": "^4.21.1",
     "nuxt": "^3.12.4",
     "vee-validate": "^4.14.7",
-    "vue": "latest"
+    "vue": "latest",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@sidebase/nuxt-auth": "^0.8.2",

@@ -1,6 +1,9 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
+import { z } from 'zod';
+import { createError } from 'h3';
+
 export default defineEventHandler(async (event) => {
 
     const body = await readBody(event);
@@ -47,14 +50,19 @@ export default defineEventHandler(async (event) => {
                 return { success: true, data: user };
             }
         } catch (error) {
-            // Log the error for debugging
-            console.error('Prisma Error:', error);
+            /// Handle validation errors
+            if (error instanceof z.ZodError) {
+                throw createError({
+                    statusCode: 400,
+                    message: error.errors.map((err) => err.message).join(', '),
+                });
+            }
 
-            // Return an error response
-            return {
-                success: false,
-                error: 'Server Failure: could not create user!',
-            };
+            // Handle other errors
+            throw createError({
+                statusCode: 500,
+                message: 'Internal server error',
+            });
         }
     }
 });

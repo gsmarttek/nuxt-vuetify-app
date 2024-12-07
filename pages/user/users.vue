@@ -258,7 +258,7 @@ async function initialize() {
 
   try {
     const response = await $fetch("/api/auth/users");
-    if (response.data) {
+    if (response.success) {
       users.value = response.data;
     } else if (response.error) {
       error_message.value = response.error;
