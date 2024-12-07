@@ -20,10 +20,13 @@ export default defineEventHandler(async (event) => {
             },
         }).then((response) => {
             user = response
-        })
-    }
 
-    return {
-        user
+            return { success: true, data: user };
+        }).catch(error => {
+            return {
+                success: false,
+                error: 'Server Failure: Something went wrong!',
+            };
+        })
     }
 });

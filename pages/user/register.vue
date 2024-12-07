@@ -1,6 +1,13 @@
 <template>
   <v-main>
     <v-container fluid>
+      <v-overlay :model-value="isLoading" class="align-center justify-center">
+        <v-progress-circular
+          v-if="isLoading"
+          indeterminate
+          color="white"
+        ></v-progress-circular>
+      </v-overlay>
       <v-row justify="center">
         <v-col md="4">
           <v-card class="pa-4 mt-5">
@@ -96,6 +103,14 @@
           </v-card>
         </v-col>
       </v-row>
+
+      <v-snackbar v-model="show_success" timeout="4000" color="success">
+        <p class="text-h6">User created successfully!</p>
+      </v-snackbar>
+
+      <v-snackbar v-model="show_error" timeout="5000" color="red">
+        <p class="text-h6">{{ error_message }}</p>
+      </v-snackbar>
     </v-container>
   </v-main>
 </template>
@@ -109,6 +124,10 @@ const theme = useTheme();
 const themeTitle = computed(() =>
   theme.global.name.value === "dark" ? "title-dark-color" : "title-light-color"
 );
+
+const show_success = ref(false);
+const show_error = ref(false);
+const error_message = ref("");
 
 const confirm = ref("");
 const password_2 = ref("");
@@ -189,10 +208,38 @@ const password = useField("password");
 const password_confirm = useField("password_confirm");
 const checkbox = useField("checkbox");
 
-const items = ref(["Male", "Female"]);
+const items = ref(["male", "female"]);
 
-const submit = handleSubmit((values) => {
-  alert(JSON.stringify(values, null, 2));
+const user = ref(null);
+const isLoading = ref(false);
+
+/**
+ * @desc Add users
+ * @param user The user to add
+ */
+async function addUser(user) {
+  isLoading.value = true;
+
+  if (user)
+    return await $fetch("/api/auth/register", {
+      method: "POST",
+      body: user,
+    });
+}
+
+const submit = handleSubmit(async (values) => {
+  const response = await addUser(values);
+
+  if (response.success) {
+    user.value = response.data;
+    show_success.value = true;
+    handleReset();
+  } else if (response.error) {
+    error_message.value = response.error;
+    show_error.value = true;
+  }
+
+  isLoading.value = false;
 });
 </script>
 

@@ -31,7 +31,7 @@
                 :headers="headers"
                 :items="users"
                 :loading="loading"
-                :sort-by="[{ key: 'created_at', order: 'asc' }]"
+                :sort-by="[{ key: 'created_at', order: 'desc' }]"
                 class="elevation-1"
               >
                 <template v-slot:top>
@@ -149,12 +149,24 @@
                   <v-icon class="me-2" size="small" @click="editItem(item)">
                     mdi-pencil
                   </v-icon>
-                  <v-icon size="small" @click="deleteItem(item)">
+                  <v-icon class="me-2" size="small" @click="deleteItem(item)">
                     mdi-delete
+                  </v-icon>
+                  <v-icon size="small" @click="deleteItem(item)">
+                    mdi-eye
                   </v-icon>
                 </template>
                 <template #item.created_at="{ item }">
                   {{ formatDate(item.created_at) }}
+                </template>
+                <template v-slot:no-data>
+                  <v-btn
+                    color="primary"
+                    @click="initialize"
+                    append-icon="mdi-refresh"
+                  >
+                    Reload
+                  </v-btn>
                 </template>
               </v-data-table>
             </v-card-item>
@@ -162,6 +174,10 @@
         </v-col>
       </v-row>
     </v-container>
+
+    <v-snackbar v-model="show_error" timeout="5000" color="red">
+      <p class="text-h6">{{ error_message }}</p>
+    </v-snackbar>
   </v-main>
 </template>
 
@@ -175,22 +191,24 @@ const themeTitle = computed(() =>
   theme.global.name.value === "dark" ? "title-dark-color" : "title-light-color"
 );
 
+const show_error = ref(false);
+const error_message = ref("");
 const dialog = ref(false);
 const dialogDelete = ref(false);
 const itemsPerPage = ref(10);
 const search = ref("");
 const loading = ref(true);
 const headers = ref([
+  { title: "Register Date", key: "created_at", align: "start" },
+  { title: "E-mail", key: "email", align: "start" },
+  { title: "Phone", key: "phone", align: "start" },
+  { title: "Sex", key: "sex", sortable: false, align: "start" },
   {
     title: "First Name",
     align: "start",
     key: "firstname",
   },
   { title: "Last Name", key: "lastname", align: "start" },
-  { title: "Phone", key: "phone", align: "start" },
-  { title: "E-mail", key: "email", align: "start" },
-  { title: "Sex", key: "sex", sortable: false, align: "start" },
-  { title: "Register Date", key: "created_at", align: "start" },
   { title: "Actions", key: "actions", sortable: false },
 ]);
 const users = ref([]);
@@ -224,11 +242,32 @@ const formTitle = computed(() => "Edit Item");
 onMounted(async () => {
   try {
     const response = await $fetch("/api/auth/users");
-    users.value = response;
+    if (response.success) {
+      users.value = response.data;
+    } else if (response.error) {
+      error_message.value = response.error;
+      show_error.value = true;
+    }
   } finally {
     loading.value = false;
   }
 });
+
+async function initialize() {
+  loading.value = true;
+
+  try {
+    const response = await $fetch("/api/auth/users");
+    if (response.data) {
+      users.value = response.data;
+    } else if (response.error) {
+      error_message.value = response.error;
+      show_error.value = true;
+    }
+  } finally {
+    loading.value = false;
+  }
+}
 
 function editItem(item) {
   editedIndex.value = users.value.indexOf(item);
@@ -271,7 +310,7 @@ function save() {
 }
 
 function formatDate(date) {
-  return dayjs(date).format("MMM D, YYYY"); // Example: Dec 4, 2024
+  return dayjs(date).format("MMM D YYYY"); // Example: Dec 4, 2024
 }
 </script>
 

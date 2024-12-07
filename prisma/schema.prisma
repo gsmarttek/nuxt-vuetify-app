@@ -18,7 +18,7 @@ model User {
   firstname  String
   lastname   String
   email      String    @unique
-  phone      String    @unique
+  phone      String
   sex        Gender
   username   String    @unique
   password   String
