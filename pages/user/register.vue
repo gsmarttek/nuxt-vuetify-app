@@ -153,7 +153,12 @@ const { handleSubmit, handleReset } = useForm({
       return "Phone number needs to be 11 digits long.";
     },
     email(value) {
-      if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return true;
+      if (
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+          value
+        )
+      )
+        return true;
 
       return "Must be a valid e-mail.";
     },
