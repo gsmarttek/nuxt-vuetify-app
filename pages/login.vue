@@ -70,6 +70,10 @@ const themeTitle = computed(() =>
   theme.global.name.value === "dark" ? "title-dark-color" : "title-light-color"
 );
 
+definePageMeta({
+  middleware: "guest",
+});
+
 const show_success = ref(false);
 const show_error = ref(false);
 const error_message = ref("");
