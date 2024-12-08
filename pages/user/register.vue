@@ -150,7 +150,7 @@ const { handleSubmit, handleReset } = useForm({
     phone(value) {
       if (/^[0-9-]{11,}$/.test(value)) return true;
 
-      return "Phone number needs to be at least 11 digits.";
+      return "Phone number needs to be 11 digits long.";
     },
     email(value) {
       if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return true;
