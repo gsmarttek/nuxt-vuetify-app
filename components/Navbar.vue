@@ -33,10 +33,21 @@
       size="small"
       text="Login"
       class="ml-3 mr-2"
+      v-if="!data?.user"
     >
     </v-btn>
 
-    <v-btn icon="mdi-dots-vertical" variant="text"></v-btn>
+    <v-btn
+      variant="outlined"
+      size="small"
+      text="Logout"
+      class="ml-3 mr-2"
+      v-if="data?.user"
+      @click="handleLogout"
+    >
+    </v-btn>
+
+    <v-btn icon="mdi-dots-vertical" variant="text" v-if="data?.user"></v-btn>
   </v-app-bar>
 
   <template v-if="$vuetify.display.mdAndUp">
@@ -54,468 +65,470 @@
           >
         </template>
       </v-menu>
+      <div v-if="data?.user">
+        <v-menu transition="slide-x-transition">
+          <template v-slot:activator="{ props }">
+            <v-btn
+              variant="text"
+              :class="activeMainMenu(['/user/register', '/user/users'])"
+              class="font-weght-medium"
+              v-bind="props"
+              >Admin +</v-btn
+            >
+          </template>
 
-      <v-menu transition="slide-x-transition">
-        <template v-slot:activator="{ props }">
-          <v-btn
-            variant="text"
-            :class="activeMainMenu(['/user/register', '/user/users'])"
-            class="font-weght-medium"
-            v-bind="props"
-            >Admin +</v-btn
-          >
-        </template>
+          <v-list>
+            <v-list-item>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/user/users"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  Manage Users
+                </NuxtLink>
+              </v-list-item-title>
 
-        <v-list>
-          <v-list-item>
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/user/users"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                Manage Users
-              </NuxtLink>
-            </v-list-item-title>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  Set Logout Time
+                </NuxtLink>
+              </v-list-item-title>
 
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                Set Logout Time
-              </NuxtLink>
-            </v-list-item-title>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  Patient Status
+                </NuxtLink>
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
 
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                Patient Status
-              </NuxtLink>
-            </v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
+        <v-menu transition="slide-x-transition">
+          <template v-slot:activator="{ props }">
+            <v-btn
+              variant="text"
+              :color="menuColor"
+              class="font-weght-medium"
+              v-bind="props"
+              >Patients +</v-btn
+            >
+          </template>
 
-      <v-menu transition="slide-x-transition">
-        <template v-slot:activator="{ props }">
-          <v-btn
-            variant="text"
-            :color="menuColor"
-            class="font-weght-medium"
-            v-bind="props"
-            >Patients +</v-btn
-          >
-        </template>
+          <v-list>
+            <v-list-item>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  Patient Entry Form
+                </NuxtLink>
+              </v-list-item-title>
 
-        <v-list>
-          <v-list-item>
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                Patient Entry Form
-              </NuxtLink>
-            </v-list-item-title>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  Patient Information Search
+                </NuxtLink>
+              </v-list-item-title>
 
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                Patient Information Search
-              </NuxtLink>
-            </v-list-item-title>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  Generate Patient QR Card
+                </NuxtLink>
+              </v-list-item-title>
 
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                Generate Patient QR Card
-              </NuxtLink>
-            </v-list-item-title>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  Patients Queue (GOPD)
+                </NuxtLink>
+              </v-list-item-title>
 
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                Patients Queue (GOPD)
-              </NuxtLink>
-            </v-list-item-title>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  Patients Queue (POPD)
+                </NuxtLink>
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
 
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                Patients Queue (POPD)
-              </NuxtLink>
-            </v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
+        <v-menu transition="slide-x-transition">
+          <template v-slot:activator="{ props }">
+            <v-btn
+              variant="text"
+              :color="menuColor"
+              class="font-weght-medium"
+              v-bind="props"
+              >Insurance +</v-btn
+            >
+          </template>
 
-      <v-menu transition="slide-x-transition">
-        <template v-slot:activator="{ props }">
-          <v-btn
-            variant="text"
-            :color="menuColor"
-            class="font-weght-medium"
-            v-bind="props"
-            >Insurance +</v-btn
-          >
-        </template>
+          <v-list>
+            <v-list-item>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  Enrollees
+                </NuxtLink>
+              </v-list-item-title>
 
-        <v-list>
-          <v-list-item>
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                Enrollees
-              </NuxtLink>
-            </v-list-item-title>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  Add HMO
+                </NuxtLink>
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
 
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                Add HMO
-              </NuxtLink>
-            </v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
+        <v-menu transition="slide-x-transition">
+          <template v-slot:activator="{ props }">
+            <v-btn
+              variant="text"
+              :color="menuColor"
+              class="font-weght-medium"
+              v-bind="props"
+              >Pharmacy &amp; Store +</v-btn
+            >
+          </template>
 
-      <v-menu transition="slide-x-transition">
-        <template v-slot:activator="{ props }">
-          <v-btn
-            variant="text"
-            :color="menuColor"
-            class="font-weght-medium"
-            v-bind="props"
-            >Pharmacy &amp; Store +</v-btn
-          >
-        </template>
+          <v-list>
+            <v-list-item>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  Add/Find Products
+                </NuxtLink>
+              </v-list-item-title>
 
-        <v-list>
-          <v-list-item>
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                Add/Find Products
-              </NuxtLink>
-            </v-list-item-title>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  Add/Find Product Rate
+                </NuxtLink>
+              </v-list-item-title>
 
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                Add/Find Product Rate
-              </NuxtLink>
-            </v-list-item-title>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  Display Product List
+                </NuxtLink>
+              </v-list-item-title>
 
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                Display Product List
-              </NuxtLink>
-            </v-list-item-title>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  Add/Find Pharmacy Supplies
+                </NuxtLink>
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
 
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                Add/Find Pharmacy Supplies
-              </NuxtLink>
-            </v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
+        <v-menu transition="slide-x-transition">
+          <template v-slot:activator="{ props }">
+            <v-btn
+              variant="text"
+              :color="menuColor"
+              class="font-weght-medium"
+              v-bind="props"
+              >OPD +</v-btn
+            >
+          </template>
 
-      <v-menu transition="slide-x-transition">
-        <template v-slot:activator="{ props }">
-          <v-btn
-            variant="text"
-            :color="menuColor"
-            class="font-weght-medium"
-            v-bind="props"
-            >OPD +</v-btn
-          >
-        </template>
+          <v-list>
+            <v-list-item>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  Payment (Walk In Patiet)
+                </NuxtLink>
+              </v-list-item-title>
 
-        <v-list>
-          <v-list-item>
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                Payment (Walk In Patiet)
-              </NuxtLink>
-            </v-list-item-title>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  Create/Find Lab Request
+                </NuxtLink>
+              </v-list-item-title>
 
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                Create/Find Lab Request
-              </NuxtLink>
-            </v-list-item-title>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  Enter/Find Lab Results
+                </NuxtLink>
+              </v-list-item-title>
 
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                Enter/Find Lab Results
-              </NuxtLink>
-            </v-list-item-title>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  Create/Find X-Ray
+                </NuxtLink>
+              </v-list-item-title>
 
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                Create/Find X-Ray
-              </NuxtLink>
-            </v-list-item-title>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  Create/Find USS
+                </NuxtLink>
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
 
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                Create/Find USS
-              </NuxtLink>
-            </v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
+        <v-menu transition="slide-x-transition">
+          <template v-slot:activator="{ props }">
+            <v-btn
+              variant="text"
+              :color="menuColor"
+              class="font-weght-medium"
+              v-bind="props"
+              >Registers +</v-btn
+            >
+          </template>
 
-      <v-menu transition="slide-x-transition">
-        <template v-slot:activator="{ props }">
-          <v-btn
-            variant="text"
-            :color="menuColor"
-            class="font-weght-medium"
-            v-bind="props"
-            >Registers +</v-btn
-          >
-        </template>
+          <v-list>
+            <v-list-item>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  Service Registration
+                </NuxtLink>
+              </v-list-item-title>
 
-        <v-list>
-          <v-list-item>
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                Service Registration
-              </NuxtLink>
-            </v-list-item-title>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  HMO Registration
+                </NuxtLink>
+              </v-list-item-title>
 
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                HMO Registration
-              </NuxtLink>
-            </v-list-item-title>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  X-Ray Type Registration
+                </NuxtLink>
+              </v-list-item-title>
 
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                X-Ray Type Registration
-              </NuxtLink>
-            </v-list-item-title>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  USS Type Registration
+                </NuxtLink>
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
 
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                USS Type Registration
-              </NuxtLink>
-            </v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
+        <v-menu transition="slide-x-transition">
+          <template v-slot:activator="{ props }">
+            <v-btn
+              variant="text"
+              :color="menuColor"
+              class="font-weght-medium"
+              v-bind="props"
+              >Reports +</v-btn
+            >
+          </template>
 
-      <v-menu transition="slide-x-transition">
-        <template v-slot:activator="{ props }">
-          <v-btn
-            variant="text"
-            :color="menuColor"
-            class="font-weght-medium"
-            v-bind="props"
-            >Reports +</v-btn
-          >
-        </template>
+          <v-list>
+            <v-list-item>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  Patients Report
+                </NuxtLink>
+              </v-list-item-title>
 
-        <v-list>
-          <v-list-item>
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                Patients Report
-              </NuxtLink>
-            </v-list-item-title>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  Payment Summary
+                </NuxtLink>
+              </v-list-item-title>
 
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                Payment Summary
-              </NuxtLink>
-            </v-list-item-title>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  Payment Summary (Walk In Patient)
+                </NuxtLink>
+              </v-list-item-title>
 
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                Payment Summary (Walk In Patient)
-              </NuxtLink>
-            </v-list-item-title>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  Appointment Report
+                </NuxtLink>
+              </v-list-item-title>
 
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                Appointment Report
-              </NuxtLink>
-            </v-list-item-title>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  X Ray Request Report
+                </NuxtLink>
+              </v-list-item-title>
 
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                X Ray Request Report
-              </NuxtLink>
-            </v-list-item-title>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  USS Request Report
+                </NuxtLink>
+              </v-list-item-title>
 
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                USS Request Report
-              </NuxtLink>
-            </v-list-item-title>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  Lab Request Report
+                </NuxtLink>
+              </v-list-item-title>
 
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                Lab Request Report
-              </NuxtLink>
-            </v-list-item-title>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  Lab Result Report
+                </NuxtLink>
+              </v-list-item-title>
 
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                Lab Result Report
-              </NuxtLink>
-            </v-list-item-title>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  Lab Result Report (Walk In Patient)
+                </NuxtLink>
+              </v-list-item-title>
 
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                Lab Result Report (Walk In Patient)
-              </NuxtLink>
-            </v-list-item-title>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  Pharmacy Supply Report
+                </NuxtLink>
+              </v-list-item-title>
 
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                Pharmacy Supply Report
-              </NuxtLink>
-            </v-list-item-title>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  Pharmacy Dispense Report
+                </NuxtLink>
+              </v-list-item-title>
 
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                Pharmacy Dispense Report
-              </NuxtLink>
-            </v-list-item-title>
+              <v-list-item-title class="mb-1">
+                <NuxtLink
+                  to="/"
+                  class="text-decoration-none menu-item"
+                  :class="subMenuColor"
+                >
+                  Nurses Daily Report
+                </NuxtLink>
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </div>
 
-            <v-list-item-title class="mb-1">
-              <NuxtLink
-                to="/"
-                class="text-decoration-none menu-item"
-                :class="subMenuColor"
-              >
-                Nurses Daily Report
-              </NuxtLink>
-            </v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
       <v-spacer></v-spacer>
     </v-app-bar>
   </template>
@@ -574,6 +587,12 @@ import { useTheme } from "vuetify";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
+
+const { data, signOut } = useAuth();
+
+async function handleLogout() {
+  await signOut();
+}
 
 const drawer = ref(false);
 
