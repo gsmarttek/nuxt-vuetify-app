@@ -1,0 +1,33 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@mdi/font": "^7.4.47",
+    "@pinia/nuxt": "^0.9.0",
+    "@prisma/client": "^5.18.0",
+    "@types/bcryptjs": "^2.4.6",
+    "bcryptjs": "^2.4.3",
+    "dayjs": "^1.11.13",
+    "jsonwebtoken": "^9.0.2",
+    "next-auth": "^4.21.1",
+    "nuxt": "^3.12.4",
+    "pinia": "^2.3.0",
+    "vee-validate": "^4.14.7",
+    "vue": "latest",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@sidebase/nuxt-auth": "^0.8.2",
+    "prisma": "^5.18.0",
+    "vite-plugin-vuetify": "^2.0.4",
+    "vuetify": "^3.6.14"
+  }
+}
